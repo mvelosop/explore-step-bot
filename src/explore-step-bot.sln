@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{F60F1C2D-3D9E-4D3B-97CA-D492D7693CD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepBot", "app\StepBot\StepBot.csproj", "{1D3110C9-8BED-4FE3-9AB0-D2E3FCD364BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D3110C9-8BED-4FE3-9AB0-D2E3FCD364BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D3110C9-8BED-4FE3-9AB0-D2E3FCD364BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D3110C9-8BED-4FE3-9AB0-D2E3FCD364BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D3110C9-8BED-4FE3-9AB0-D2E3FCD364BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1D3110C9-8BED-4FE3-9AB0-D2E3FCD364BB} = {F60F1C2D-3D9E-4D3B-97CA-D492D7693CD9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {019E9E64-50A5-461B-953D-F18BEEEC2F2C}
+	EndGlobalSection
+EndGlobal
