@@ -29,6 +29,5 @@ namespace StepBot
             Logger.LogInformation("Running dialog with Activity.");
             await DialogManager.OnTurnAsync(turnContext, cancellationToken: cancellationToken).ConfigureAwait(false);
         }
-
     }
 }

@@ -1,0 +1,21 @@
+﻿# Hello
+- Hi
+- Hi there!
+- Hello
+- Hi, we are up and running!!
+
+# StartProcess
+- Starting the process
+- Beginning now
+
+# ProcessResult
+- ```
+**Process result**
+${dialog.ProcessResult}
+```
+
+# Help
+- Help from RootDialog
+
+# Unknown
+- Unknown intent: **${turn.activity.text}**
