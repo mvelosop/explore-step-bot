@@ -68,9 +68,41 @@ namespace StepBot.Dialogs
                     Actions = {
                         new SendActivity("${StartProcess()}"),
 
-                        new BeginDialog(nameof(ProcessDialog)) {
-                            ResultProperty = "dialog.processResult"
+                        new DeleteProperty {
+                            Property = "conversation.process"
                         },
+
+                        new BeginDialog(nameof(ProcessDialog)),
+
+                        new SendActivity("${ProcessResult()}")
+                    }
+                },
+
+                new OnIntent {
+                    Intent = "UpdateStep1",
+                    Actions = {
+                        new SendActivity("${UpdateProcess()}"),
+
+                        new DeleteProperty {
+                            Property = "conversation.process.step1"
+                        },
+
+                        new BeginDialog(nameof(ProcessDialog)),
+
+                        new SendActivity("${ProcessResult()}")
+                    }
+                },
+
+                new OnIntent {
+                    Intent = "UpdateStep2",
+                    Actions = {
+                        new SendActivity("${UpdateProcess()}"),
+
+                        new DeleteProperty {
+                            Property = "conversation.process.step2"
+                        },
+
+                        new BeginDialog(nameof(ProcessDialog)),
 
                         new SendActivity("${ProcessResult()}")
                     }
@@ -110,7 +142,15 @@ namespace StepBot.Dialogs
                     new IntentPattern {
                         Intent = "ProcessIntent",
                         Pattern = @"(process|begin|start)"
-                    }
+                    },
+                    new IntentPattern {
+                        Intent = "UpdateStep1",
+                        Pattern = @"update 1"
+                    },
+                    new IntentPattern {
+                        Intent = "UpdateStep2",
+                        Pattern = @"update 2"
+                    },
                 }
             };
         }

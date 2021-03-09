@@ -1,13 +1,9 @@
 ﻿# Help
 - ```
 Help from **RootDialog**
-- Type **Start** to start the process...
-- And some more but it's a guessing game 😉
-```
-- ```
-**RootDialog** brief help
-- You can type **Start** to begin the process
-- There are some other commands but you'll have to guess them 😉
+- Type **start** to start the process...
+- Type **update 1** or **update 2** to update the step
+- And some more but it's a guessing game. I'll let you know 😉
 ```
 
 # Where
@@ -23,8 +19,10 @@ Help from **RootDialog**
 - Hi, we are up and running!!
 
 # StartProcess
-- Starting the process
-- Beginning now
+- **Creating the process**
+
+# UpdateProcess
+- **Updating the process**
 
 # ProcessResult
 - ```
