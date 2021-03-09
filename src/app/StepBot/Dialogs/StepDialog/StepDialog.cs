@@ -1,4 +1,4 @@
-﻿using Microsoft.Bot.Builder.Dialogs.Adaptive;
+using Microsoft.Bot.Builder.Dialogs.Adaptive;
 using Microsoft.Bot.Builder.Dialogs.Adaptive.Actions;
 using Microsoft.Bot.Builder.Dialogs.Adaptive.Conditions;
 using Microsoft.Bot.Builder.Dialogs.Adaptive.Generators;
@@ -35,12 +35,14 @@ namespace StepBot.Dialogs
                         new TextInput {
                             Property = "dialog.text1",
                             Prompt = new ActivityTemplate("Enter text value #1:"),
+                            AlwaysPrompt = true,
                             AllowInterruptions = "turn.recognized.score >= 0.9"
                         },
 
                         new TextInput {
                             Property = "dialog.text2",
                             Prompt = new ActivityTemplate("Enter text value #2:"),
+                            AlwaysPrompt = true,
                             AllowInterruptions = "turn.recognized.score >= 0.9"
                         },
 
@@ -106,6 +108,10 @@ namespace StepBot.Dialogs
                     new IntentPattern {
                         Intent = "WhereIntent",
                         Pattern = @"(where)"
+                    },
+                    new IntentPattern {
+                        Intent = "UpdateIntent",
+                        Pattern = @"(update|ammend|correct|fix)"
                     },
                 }
             };
