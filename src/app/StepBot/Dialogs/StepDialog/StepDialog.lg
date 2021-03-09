@@ -2,6 +2,7 @@
 - ```
 Help from **StepDialog**
 - Just type some text 😊
+- Type "**redo**" to repeat the whole step.
 ```
 
 # Where
@@ -17,6 +18,9 @@ ${turn.recognized}
 
 # StepTitle
 - ## Data for "${dialog.stepTitle}"
+
+# RedoingStepTitle
+- ## Repeating data entry for "${dialog.stepTitle}"
 
 # Result
 - ```

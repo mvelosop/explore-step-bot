@@ -1,4 +1,4 @@
-using Microsoft.Bot.Builder.Dialogs.Adaptive;
+﻿using Microsoft.Bot.Builder.Dialogs.Adaptive;
 using Microsoft.Bot.Builder.Dialogs.Adaptive.Actions;
 using Microsoft.Bot.Builder.Dialogs.Adaptive.Conditions;
 using Microsoft.Bot.Builder.Dialogs.Adaptive.Generators;
@@ -32,6 +32,60 @@ namespace StepBot.Dialogs
 
                         new SendActivity("${StepTitle()}"),
 
+                        new EmitEvent { 
+                            EventName = "Step.Start",
+                            BubbleEvent = false
+                        },
+                    }
+                },
+
+                new OnIntent {
+                    Intent = "HelpIntent",
+                    Actions = {
+                        new SendActivity("${Help()}")
+                    }
+                },
+
+                new OnIntent {
+                    Intent = "WhereIntent",
+                    Actions = {
+                        new CodeAction(async (context, options) => await context.EndDialogAsync(options)),
+
+                        new SendActivity("${Where()}")
+                    }
+                },
+
+                new OnIntent {
+                    Intent = "RedoIntent",
+                    Actions = {
+                        new SendActivity("${RedoingStepTitle()}"),
+
+                        new EmitEvent {
+                            EventName = "Step.Start",
+                            BubbleEvent = false
+                        },
+                    }
+                },
+
+                //new OnIntent {
+                //    Intent = "CancelIntent",
+                //    Actions = {
+                //        new SendActivity("${DialogCancelled()}"),
+
+                //        new CancelAllDialogs()
+                //    }
+                //},
+
+                new OnCancelDialog {
+                    Actions = {
+                        new SendActivity("${DialogCancelled()}")
+                    }
+                },
+
+                new OnDialogEvent {
+                    Event = "Step.Start",
+
+                    Actions = {
                         new TextInput {
                             Property = "dialog.text1",
                             Prompt = new ActivityTemplate("Enter text value #1:"),
@@ -56,40 +110,9 @@ namespace StepBot.Dialogs
                         }),
 
                         new EndDialog("=dialog.stepText")
+
                     }
-                },
-
-                new OnIntent {
-                    Intent = "HelpIntent",
-                    Actions = {
-                        new SendActivity("${Help()}")
-                    }
-                },
-
-                new OnIntent {
-                    Intent = "WhereIntent",
-                    Actions = {
-                        new CodeAction(async (context, options) => await context.EndDialogAsync(options)),
-
-                        new SendActivity("${Where()}")
-                    }
-                },
-
-                //new OnIntent {
-                //    Intent = "CancelIntent",
-                //    Actions = {
-                //        new SendActivity("${DialogCancelled()}"),
-
-                //        new CancelAllDialogs()
-                //    }
-                //},
-
-                new OnCancelDialog {
-                    Actions = {
-                        new SendActivity("${DialogCancelled()}")
-                    }
-                },
-
+                }
             };
         }
 
@@ -110,8 +133,8 @@ namespace StepBot.Dialogs
                         Pattern = @"(where)"
                     },
                     new IntentPattern {
-                        Intent = "UpdateIntent",
-                        Pattern = @"(update|ammend|correct|fix)"
+                        Intent = "RedoIntent",
+                        Pattern = @"(redo|repeat|ammend|correct|fix)"
                     },
                 }
             };
