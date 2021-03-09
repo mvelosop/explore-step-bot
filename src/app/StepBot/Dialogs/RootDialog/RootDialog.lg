@@ -30,7 +30,7 @@ Help from **RootDialog**
 - ```
 # Process result
 
-${dialog.ProcessResult}
+${conversation.process.text}
 ```
 
 # Unknown

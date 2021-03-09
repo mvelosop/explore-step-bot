@@ -14,8 +14,7 @@ Help from **ProcessDialog**
 
 # Result
 - ```
-${dialog.step1Text}
+${conversation.process.step1.text}
 
-${dialog.step2Text}
-
+${conversation.process.step2.text}
 ```
