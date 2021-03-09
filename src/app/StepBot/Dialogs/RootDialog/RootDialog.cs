@@ -28,16 +28,38 @@ namespace StepBot.Dialogs
                 },
 
                 new OnIntent {
-                    Intent = "HelloIntent",
+                    Intent = "HelpIntent",
                     Actions = {
-                        new SendActivity("${Hello()}")
+                        new SendActivity("${Help()}")
                     }
                 },
 
                 new OnIntent {
-                    Intent = "HelpIntent",
+                    Intent = "WhereIntent",
                     Actions = {
-                        new SendActivity("${Help()}")
+                        new SendActivity("${Where()}")
+                    }
+                },
+
+                new OnIntent {
+                    Intent = "CancelIntent",
+                    Actions = {
+                        new SendActivity("${DialogCancelled()}"),
+
+                        new CancelAllDialogs()
+                    }
+                },
+
+                new OnCancelDialog {
+                    Actions = {
+                        new SendActivity("${DialogCancelled()}")
+                    }
+                },
+
+                new OnIntent {
+                    Intent = "HelloIntent",
+                    Actions = {
+                        new SendActivity("${Hello()}")
                     }
                 },
 
@@ -58,7 +80,8 @@ namespace StepBot.Dialogs
                     Actions = {
                         new SendActivity("${Unknown()}")
                     }
-                }
+                },
+
             };
 
             Dialogs.Add(new ProcessDialog());
@@ -78,7 +101,11 @@ namespace StepBot.Dialogs
                     },
                     new IntentPattern {
                         Intent = "CancelIntent",
-                        Pattern = "@(cancel|exit|bye)"
+                        Pattern = @"(cancel|exit|bye)"
+                    },
+                    new IntentPattern {
+                        Intent = "WhereIntent",
+                        Pattern = @"(where)"
                     },
                     new IntentPattern {
                         Intent = "ProcessIntent",

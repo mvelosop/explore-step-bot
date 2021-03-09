@@ -6,16 +6,19 @@ using Microsoft.Bot.Builder.Dialogs.Adaptive.Input;
 using Microsoft.Bot.Builder.Dialogs.Adaptive.Recognizers;
 using Microsoft.Bot.Builder.Dialogs.Adaptive.Templates;
 using Microsoft.Bot.Builder.LanguageGeneration;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StepBot.Dialogs
 {
-    public class ProcessDialog : AdaptiveDialog
+    public class StepDialog : AdaptiveDialog
     {
-        public ProcessDialog()
+        public StepDialog()
         {
-            var paths = new[] { ".", "Dialogs", "ProcessDialog", "ProcessDialog.lg" };
+            var paths = new[] { ".", "Dialogs", "StepDialog", "StepDialog.lg" };
             var templatesFile = Path.Combine(paths);
             var templates = Templates.ParseFile(templatesFile);
             Generator = new TemplateEngineLanguageGenerator(templates);
@@ -25,26 +28,32 @@ namespace StepBot.Dialogs
             Triggers = new List<OnCondition> {
                 new OnBeginDialog {
                     Actions = {
-                        new SendActivity("${ProcessTitle()}"),
+                        new CodeAction(async (context, options) => await context.EndDialogAsync(options)),
 
-                        new BeginDialog(nameof(StepDialog), "{stepTitle: 'Step #1'}"){ 
-                            ResultProperty = "dialog.step1Text"
+                        new SendActivity("${StepTitle()}"),
+
+                        new TextInput {
+                            Property = "dialog.text1",
+                            Prompt = new ActivityTemplate("Enter text value #1:"),
+                            AllowInterruptions = "turn.recognized.score >= 0.9"
                         },
 
-                        new BeginDialog(nameof(StepDialog), "{stepTitle: 'Step #2'}"){ 
-                            ResultProperty = "dialog.step2Text"
+                        new TextInput {
+                            Property = "dialog.text2",
+                            Prompt = new ActivityTemplate("Enter text value #2:"),
+                            AllowInterruptions = "turn.recognized.score >= 0.9"
                         },
 
-                        new CodeAction(async (context, options) =>
+                        new CodeAction(async(context, options) =>
                         {
                             context.State.SetValue(
-                                "dialog.processText",
-                                templates.Evaluate("Result", context.State, new EvaluationOptions{ LineBreakStyle = LGLineBreakStyle.Default }));
+                                "dialog.stepText",
+                                templates.Evaluate("Result", context.State, new EvaluationOptions{ LineBreakStyle = LGLineBreakStyle.Default}));
 
                             return await context.EndDialogAsync(options);
                         }),
 
-                        new EndDialog("=dialog.processText")
+                        new EndDialog("=dialog.stepText")
                     }
                 },
 
@@ -58,6 +67,8 @@ namespace StepBot.Dialogs
                 new OnIntent {
                     Intent = "WhereIntent",
                     Actions = {
+                        new CodeAction(async (context, options) => await context.EndDialogAsync(options)),
+
                         new SendActivity("${Where()}")
                     }
                 },
@@ -78,8 +89,6 @@ namespace StepBot.Dialogs
                 },
 
             };
-
-            Dialogs.Add(new StepDialog());
         }
 
         private RegexRecognizer CreateRegexRecognizer()
@@ -92,11 +101,11 @@ namespace StepBot.Dialogs
                     },
                     new IntentPattern {
                         Intent = "CancelIntent",
-                        Pattern = "@(cancel|exit|bye)"
+                        Pattern = @"(cancel|exit|bye)"
                     },
                     new IntentPattern {
                         Intent = "WhereIntent",
-                        Pattern = "@(where)"
+                        Pattern = @"(where)"
                     },
                 }
             };

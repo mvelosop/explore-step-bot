@@ -1,0 +1,26 @@
+﻿# Help
+- ```
+Help from **StepDialog**
+- Just type some text 😊
+```
+
+# Where
+- ```
+You're at **StepDialog**
+\```
+${turn.recognized}
+\```
+```
+
+# DialogCancelled
+- **StepDialog** was cancelled 😕
+
+# StepTitle
+- ## Data for "${dialog.stepTitle}"
+
+# Result
+- ```
+## ${dialog.stepTitle} result:
+- ${dialog.text1}
+- ${dialog.text2}
+```

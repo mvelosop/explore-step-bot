@@ -1,4 +1,22 @@
-﻿# Hello
+﻿# Help
+- ```
+Help from **RootDialog**
+- Type **Start** to start the process...
+- And some more but it's a guessing game 😉
+```
+- ```
+**RootDialog** brief help
+- You can type **Start** to begin the process
+- There are some other commands but you'll have to guess them 😉
+```
+
+# Where
+- You're at **RootDialog**
+
+# DialogCancelled
+- **RootDialog** was cancelled 😕
+
+# Hello
 - Hi
 - Hi there!
 - Hello
@@ -10,12 +28,10 @@
 
 # ProcessResult
 - ```
-**Process result**
+# Process result
+
 ${dialog.ProcessResult}
 ```
-
-# Help
-- Help from RootDialog
 
 # Unknown
 - Unknown intent: **${turn.activity.text}**
